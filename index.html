@@ -239,8 +239,105 @@ Fuente: Quividi Analytics
 
 <script>
 
-const API_URL =
-"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnSnkhAb3SfYUdOW5JYvF6ILF9ogXEJXypvyUzKyjsrwdOh_EZG_lQ0_2gcEWVQCY7GZyEFqXd848sWUVs8nq4IdWDs021Rj7eH-rv9J7WpfElD3PBwLPo1EOlwcdZAunlFA8jECnQIU_UTYYqnzi6L5on9KS_sYyZfekHaaZmEyyRJM1RciDVSgs0qpnTxObJbR1GnYHdDg090M45aHrvgU6ySHQcddSxZ4VPPxXtpCVkbWwYMvJSUFghNalDC2Nvl2NlYk6RrHtzgS2_7BRN5yaPTNxQ&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198";
+const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQaibCjqGsFztozPQnVbvqfChEaUR6CqCIWgwEUsyLA3aw08uf0NPQFbfYiUIHO_L2vy7jr1B-nWANDO8YkVi6KS3GIIBvL8SvZuMR8pfP1ITZ9MLywPzBP2FGTuf_JDklDAexS3jo774kQZIeO5CYwIbcmwlYQw60aUvBoPXej-aItIjKWAxW-cshaW7X0YRwcWRYdZAej6WmT2QWlSJUx-aFDRj1lR74eTjFnG0sDCM1aDC_tS4T-6xBoPAliCDcM7WmgJQs_6jW__Iu62sGe5x4jMg&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198";
+
+let datos = [];
+
+const mesSelect = document.getElementById("mesSelect");
+const pantallaSelect = document.getElementById("pantallaSelect");
+
+async function cargarDatos() {
+
+    const response = await fetch(API_URL);
+    datos = await response.json();
+
+    cargarMeses();
+
+}
+
+function cargarMeses() {
+
+    const meses = [...new Set(datos.map(d => d.mes))];
+
+    mesSelect.innerHTML = "";
+
+    meses.forEach(mes => {
+
+        const option = document.createElement("option");
+        option.value = mes;
+        option.textContent = mes;
+
+        mesSelect.appendChild(option);
+
+    });
+
+    cargarPantallas();
+}
+
+function cargarPantallas() {
+
+    const mes = mesSelect.value;
+
+    const pantallas = datos.filter(d => d.mes === mes);
+
+    pantallaSelect.innerHTML = "";
+
+    pantallas.forEach(p => {
+
+        const option = document.createElement("option");
+
+        option.value = p.locationId;
+        option.textContent = p.nombre;
+
+        pantallaSelect.appendChild(option);
+
+    });
+
+    actualizarDashboard();
+
+}
+
+function actualizarDashboard() {
+
+    const mes = mesSelect.value;
+    const id = Number(pantallaSelect.value);
+
+    const registro = datos.find(
+        d => d.mes === mes && d.locationId === id
+    );
+
+    if (!registro) return;
+
+    document.getElementById("nombrePantalla").textContent =
+        registro.nombre;
+
+    document.getElementById("total").textContent =
+        registro.total.toLocaleString();
+
+    document.getElementById("vehiculos").textContent =
+        registro.vehiculos.toLocaleString();
+
+    document.getElementById("peatones").textContent =
+        registro.peatones.toLocaleString();
+
+    document.getElementById("atencion").textContent =
+        registro.atencion + " seg";
+
+    document.getElementById("conteo").textContent =
+        registro.conteoVehiculos.toLocaleString();
+		console.log(registro);
+console.log(registro.foto);
+
+    document.getElementById("fotoPantalla").src =
+        registro.foto;
+
+}
+
+mesSelect.addEventListener("change", cargarPantallas);
+
+pantallaSelect.addEventListener("change", actualizarDashboard);
+
+cargarDatos();
 
 </script>
 
