@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Audiencias iCo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --ico-blue:#005EB8;
+    --bg:#F5F7FA;
+    --card:#FFFFFF;
+    --text:#1F2937;
+    --border:#E5E7EB;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.header{
+    background:white;
+    padding:20px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.logo{
+    height:60px;
+}
+
+.title{
+    text-align:right;
+}
+
+.title h1{
+    font-size:28px;
+    color:var(--ico-blue);
+}
+
+.title p{
+    color:#666;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:30px;
+}
+
+.filters{
+    display:flex;
+    gap:20px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+select{
+    padding:12px 16px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    min-width:250px;
+    font-size:16px;
+}
+
+.main{
+    display:grid;
+    grid-template-columns:420px 1fr;
+    gap:25px;
+}
+
+.photo-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.photo-card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.screen-name{
+    padding:20px;
+    font-size:24px;
+    font-weight:700;
+    color:var(--ico-blue);
+}
+
+.kpis{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.card h3{
+    color:#666;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.value{
+    font-size:38px;
+    font-weight:700;
+    color:var(--ico-blue);
+}
+
+.footer{
+    margin-top:40px;
+    text-align:center;
+    color:#777;
+    font-size:14px;
+}
+
+.no-data{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    display:none;
+}
+
+@media(max-width:1000px){
+
+.main{
+    grid-template-columns:1fr;
+}
+
+.kpis{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<img src="logo.png" class="logo">
+
+<div class="title">
+    <h1>Dashboard de Audiencias</h1>
+    <p>Datos Quividi</p>
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="filters">
+
+<select id="mesSelect"></select>
+
+<select id="pantallaSelect"></select>
+
+</div>
+
+<div id="noData" class="no-data">
+    Sin información disponible para la selección realizada.
+</div>
+
+<div class="main" id="dashboard">
+
+<div class="photo-card">
+
+<img id="fotoPantalla">
+
+<div class="screen-name" id="nombrePantalla">
+</div>
+
+</div>
+
+<div class="kpis">
+
+<div class="card">
+    <h3>Audiencia Total</h3>
+    <div class="value" id="total"></div>
+</div>
+
+<div class="card">
+    <h3>Vehículos Impactados</h3>
+    <div class="value" id="vehiculos"></div>
+</div>
+
+<div class="card">
+    <h3>Peatones Impactados</h3>
+    <div class="value" id="peatones"></div>
+</div>
+
+<div class="card">
+    <h3>Tiempo Promedio de Atención</h3>
+    <div class="value" id="atencion"></div>
+</div>
+
+<div class="card">
+    <h3>Conteo Vehicular</h3>
+    <div class="value" id="conteo"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Fuente: Quividi Analytics
+
+</div>
+
+</div>
+
+<script>
+
+const API_URL =
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnSnkhAb3SfYUdOW5JYvF6ILF9ogXEJXypvyUzKyjsrwdOh_EZG_lQ0_2gcEWVQCY7GZyEFqXd848sWUVs8nq4IdWDs021Rj7eH-rv9J7WpfElD3PBwLPo1EOlwcdZAunlFA8jECnQIU_UTYYqnzi6L5on9KS_sYyZfekHaaZmEyyRJM1RciDVSgs0qpnTxObJbR1GnYHdDg090M45aHrvgU6ySHQcddSxZ4VPPxXtpCVkbWwYMvJSUFghNalDC2Nvl2NlYk6RrHtzgS2_7BRN5yaPTNxQ&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198";
+
+</script>
+
+</body>
+</html>
