@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,156 +12,368 @@
 <title>Dashboard Audiencias iCo</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 :root{
-    --ico-blue:#005EB8;
-    --bg:#F5F7FA;
-    --card:#FFFFFF;
-    --text:#1F2937;
-    --border:#E5E7EB;
+
+--ico-blue:#005EB8;
+--bg:#F4F6F9;
+--card:#ffffff;
+--text:#1F2937;
+--border:#E5E7EB;
+
 }
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
 }
 
 body{
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
+
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:var(--text);
+
 }
 
 .header{
-    background:white;
-    padding:20px 40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
+
+background:white;
+height:90px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:0 45px;
+
+box-shadow:0 4px 18px rgba(0,0,0,.05);
+
 }
 
 .logo{
-    height:60px;
+
+height:55px;
+
 }
 
-.title{
-    text-align:right;
+.header h1{
+
+font-size:30px;
+color:var(--ico-blue);
+
 }
 
-.title h1{
-    font-size:28px;
-    color:var(--ico-blue);
-}
+.header p{
 
-.title p{
-    color:#666;
+margin-top:4px;
+color:#6B7280;
+
 }
 
 .container{
-    max-width:1400px;
-    margin:auto;
-    padding:30px;
+
+max-width:1700px;
+margin:auto;
+padding:35px;
+
 }
 
 .filters{
-    display:flex;
-    gap:20px;
-    margin-bottom:25px;
-    flex-wrap:wrap;
+
+display:flex;
+gap:20px;
+margin-bottom:30px;
+
 }
 
-select{
-    padding:12px 16px;
-    border-radius:10px;
-    border:1px solid var(--border);
-    min-width:250px;
-    font-size:16px;
+.filters select{
+
+padding:14px 18px;
+
+border:1px solid var(--border);
+
+border-radius:12px;
+
+background:white;
+
+font-size:15px;
+
+min-width:260px;
+
 }
 
 .main{
-    display:grid;
-    grid-template-columns:420px 1fr;
-    gap:25px;
+
+display:grid;
+
+grid-template-columns:420px 1fr;
+
+gap:28px;
+
+align-items:start;
+
 }
 
 .photo-card{
     background:white;
-    border-radius:20px;
+    border-radius:22px;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.05);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-.photo-card img{
-    width:100%;
-    height:350px;
-    object-fit:cover;
+
+.photo{
+
+position:relative;
+
 }
 
-.screen-name{
-    padding:20px;
-    font-size:24px;
-    font-weight:700;
-    color:var(--ico-blue);
+.photo img{
+
+width:100%;
+height:520px;
+object-fit:cover;
+
 }
 
-.kpis{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+.overlay{
+
+position:absolute;
+
+left:0;
+right:0;
+bottom:0;
+
+padding:35px;
+
+background:linear-gradient(
+transparent,
+rgba(0,0,0,.85)
+);
+
+}
+
+.overlay h2{
+
+color:white;
+
+font-size:31px;
+
+font-weight:700;
+
+}
+
+.right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+.big-card{
+
+background:white;
+
+padding:35px;
+
+border-radius:22px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.big-card h3{
+
+font-size:17px;
+
+font-weight:500;
+
+color:#6B7280;
+
+}
+
+.big-value{
+
+margin-top:12px;
+
+font-size:68px;
+
+font-weight:800;
+
+color:var(--ico-blue);
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:22px;
+
 }
 
 .card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    transition:.25s;
+
+    border:1px solid #EEF2F7;
+
 }
 
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 16px 35px rgba(0,0,0,.08);
+
+}
 .card h3{
-    color:#666;
-    font-size:15px;
-    margin-bottom:10px;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    color:#7C8796;
+
+    margin-bottom:15px;
+    font-weight:700;
+
 }
 
 .value{
-    font-size:38px;
+
+    font-size:58px;
+
     font-weight:700;
+
     color:var(--ico-blue);
+
+    line-height:1;
+
+    margin-top:15px;
+
+}
+
+.demografia{
+
+display:grid;
+
+grid-template-columns:340px 1fr;
+
+gap:22px;
+
+}
+
+.perfil{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+.perfil h3{
+
+margin-bottom:20px;
+
+}
+
+#perfilGenero{
+
+font-size:40px;
+
+font-weight:800;
+
+color:var(--ico-blue);
+
+}
+
+#perfilEdad{
+
+margin-top:10px;
+
+font-size:24px;
+
+color:#6B7280;
+
+}
+
+canvas{
+
+width:100% !important;
+
+height:280px !important;
+
 }
 
 .footer{
-    margin-top:40px;
-    text-align:center;
-    color:#777;
-    font-size:14px;
+
+margin-top:35px;
+
+text-align:center;
+
+color:#999;
+
+font-size:13px;
+
 }
 
-.no-data{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-    display:none;
-}
-
-@media(max-width:1000px){
+@media(max-width:1200px){
 
 .main{
-    grid-template-columns:1fr;
+
+grid-template-columns:1fr;
+
 }
 
-.kpis{
-    grid-template-columns:1fr;
+.demografia{
+
+grid-template-columns:1fr;
+
+}
+
+.grid{
+
+grid-template-columns:1fr;
+
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -166,9 +382,12 @@ select{
 
 <img src="logo.png" class="logo">
 
-<div class="title">
-    <h1>Dashboard de Audiencias</h1>
-    <p>Datos Quividi</p>
+<div>
+
+<h1>Dashboard de Audiencias</h1>
+
+<p>Powered by Quividi Analytics</p>
+
 </div>
 
 </header>
@@ -183,46 +402,89 @@ select{
 
 </div>
 
-<div id="noData" class="no-data">
-    Sin información disponible para la selección realizada.
-</div>
-
-<div class="main" id="dashboard">
+<div class="main">
 
 <div class="photo-card">
 
+<div class="photo">
+
 <img id="fotoPantalla">
 
-<div class="screen-name" id="nombrePantalla">
+<div class="overlay">
+
+<h2 id="nombrePantalla"></h2>
+
+</div>
+
 </div>
 
 </div>
 
-<div class="kpis">
+<div class="right">
+
+<div class="big-card">
+
+<h3>Audiencia Total</h3>
+
+<div class="big-value" id="total"></div>
+
+</div>
+
+<div class="grid">
 
 <div class="card">
-    <h3>Audiencia Total</h3>
-    <div class="value" id="total"></div>
+
+<h3>Impresiones Vehiculares</h3>
+
+<div class="value" id="vehiculos"></div>
+
 </div>
 
 <div class="card">
-    <h3>Vehículos Impactados</h3>
-    <div class="value" id="vehiculos"></div>
+
+<h3>Impresiones Peatonales</h3>
+
+<div class="value" id="peatones"></div>
+
 </div>
 
 <div class="card">
-    <h3>Peatones Impactados</h3>
-    <div class="value" id="peatones"></div>
+
+<h3>Conteo Vehicular</h3>
+
+<div class="value" id="conteo"></div>
+
+</div>
+
+<div class="card perfil">
+
+<h3>Perfil predominante</h3>
+
+<div id="perfilGenero"></div>
+<div id="perfilEdad"></div>
+
+</div>
+
+</div>
+
+<div class="demografia">
+
+<div class="card">
+
+<h3>Distribución por género</h3>
+
+<canvas id="graficoGenero"></canvas>
+
 </div>
 
 <div class="card">
-    <h3>Tiempo Promedio de Atención</h3>
-    <div class="value" id="atencion"></div>
+
+<h3>Distribución por edades</h3>
+
+<canvas id="graficoEdad"></canvas>
+
 </div>
 
-<div class="card">
-    <h3>Conteo Vehicular</h3>
-    <div class="value" id="conteo"></div>
 </div>
 
 </div>
@@ -231,7 +493,7 @@ select{
 
 <div class="footer">
 
-Fuente: Quividi Analytics
+Fuente: Quividi · Dashboard desarrollado por iCo Medios
 
 </div>
 
@@ -239,55 +501,80 @@ Fuente: Quividi Analytics
 
 <script>
 
-const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQaibCjqGsFztozPQnVbvqfChEaUR6CqCIWgwEUsyLA3aw08uf0NPQFbfYiUIHO_L2vy7jr1B-nWANDO8YkVi6KS3GIIBvL8SvZuMR8pfP1ITZ9MLywPzBP2FGTuf_JDklDAexS3jo774kQZIeO5CYwIbcmwlYQw60aUvBoPXej-aItIjKWAxW-cshaW7X0YRwcWRYdZAej6WmT2QWlSJUx-aFDRj1lR74eTjFnG0sDCM1aDC_tS4T-6xBoPAliCDcM7WmgJQs_6jW__Iu62sGe5x4jMg&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198";
+const API_URL =
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnS9f9lZjlwrwBGkQJ_z1uor1L9WoPo5PIq9UmtCR131QaAnbIOqYBuyg9mAVurJSjqAnLmI-o4cmX87ykS62tk89tPYypLvm_lUuMiQuy9MP2q2SjleyaK4C5kV28C80p1FpBE-hGAbaZieDsvFlu9anv7tpT-v6VRHRH2tU_tKAqN2Euvk-S1YA4utDrw5zwIl57PWQ2uVjNBzmK-3LTTvRQh0WLXAKDTF5KsFdHUXGPUdSrqoe7xWRmoKvBxczruRaiajISqshORFafq1cW2CZ-EzqQ&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198"
+let datos=[];
 
-let datos = [];
+let chartGenero=null;
+let chartEdad=null;
+    const ctxGenero =
+document.getElementById("graficoGenero");
 
-const mesSelect = document.getElementById("mesSelect");
-const pantallaSelect = document.getElementById("pantallaSelect");
+const ctxEdad =
+document.getElementById("graficoEdad");
 
-async function cargarDatos() {
+const mesSelect=document.getElementById("mesSelect");
+const pantallaSelect=document.getElementById("pantallaSelect");
 
-    const response = await fetch(API_URL);
-    datos = await response.json();
+async function cargarDatos(){
 
-    cargarMeses();
+    try{
+
+        const response=await fetch(API_URL);
+
+        datos=await response.json();
+
+        cargarMeses();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("No fue posible cargar la información.");
+
+    }
 
 }
 
-function cargarMeses() {
+function cargarMeses(){
 
-    const meses = [...new Set(datos.map(d => d.mes))];
+    const meses=[...new Set(datos.map(x=>x.mes))].sort().reverse();
 
-    mesSelect.innerHTML = "";
+    mesSelect.innerHTML="";
 
-    meses.forEach(mes => {
+    meses.forEach(m=>{
 
-        const option = document.createElement("option");
-        option.value = mes;
-        option.textContent = mes;
+        const option=document.createElement("option");
+
+        option.value=m;
+
+        option.textContent=m;
 
         mesSelect.appendChild(option);
 
     });
 
     cargarPantallas();
+
 }
 
-function cargarPantallas() {
+function cargarPantallas(){
 
-    const mes = mesSelect.value;
+    const mes=mesSelect.value;
 
-    const pantallas = datos.filter(d => d.mes === mes);
+    const pantallas=datos.filter(x=>x.mes===mes);
 
-    pantallaSelect.innerHTML = "";
+    pantallaSelect.innerHTML="";
 
-    pantallas.forEach(p => {
+    pantallas.forEach(p=>{
 
-        const option = document.createElement("option");
+        const option=document.createElement("option");
 
-        option.value = p.locationId;
-        option.textContent = p.nombre;
+        option.value=p.locationId;
+
+        option.textContent=p.nombre;
 
         pantallaSelect.appendChild(option);
 
@@ -297,44 +584,313 @@ function cargarPantallas() {
 
 }
 
-function actualizarDashboard() {
+function actualizarDashboard(){
 
-    const mes = mesSelect.value;
-    const id = Number(pantallaSelect.value);
+    const mes=mesSelect.value;
 
-    const registro = datos.find(
-        d => d.mes === mes && d.locationId === id
+    const id=Number(pantallaSelect.value);
+
+    const registro=datos.find(x=>
+
+        x.mes===mes &&
+
+        Number(x.locationId)===id
+
     );
 
-    if (!registro) return;
+    if(!registro)return;
 
-    document.getElementById("nombrePantalla").textContent =
+    //---------------------
+
+    // FOTO
+
+    //---------------------
+
+    document.getElementById("fotoPantalla").src=
+
+        registro.foto && registro.foto!=""
+
+        ? registro.foto
+
+        : "https://picsum.photos/800/600";
+
+    //---------------------
+
+    // NOMBRE
+
+    //---------------------
+
+    document.getElementById("nombrePantalla").innerHTML=
+
         registro.nombre;
 
-    document.getElementById("total").textContent =
-        registro.total.toLocaleString();
+    //---------------------
 
-    document.getElementById("vehiculos").textContent =
-        registro.vehiculos.toLocaleString();
+    // KPIs
 
-    document.getElementById("peatones").textContent =
-        registro.peatones.toLocaleString();
+    //---------------------
 
-    document.getElementById("atencion").textContent =
-        registro.atencion + " seg";
+    document.getElementById("total").innerHTML=
 
-    document.getElementById("conteo").textContent =
-        registro.conteoVehiculos.toLocaleString();
-		console.log(registro);
-console.log(registro.foto);
+        Number(registro.total).toLocaleString();
 
-    document.getElementById("fotoPantalla").src =
-"https://picsum.photos/800/500";
+    document.getElementById("vehiculos").innerHTML=
+
+        Number(registro.vehiculos).toLocaleString();
+
+    document.getElementById("peatones").innerHTML=
+
+        Number(registro.peatones).toLocaleString();
+
+    document.getElementById("conteo").innerHTML=
+
+        Number(registro.conteoVehiculos).toLocaleString();
+
+    actualizarPerfil(registro);
+
+    actualizarGraficos(registro);
+
+}
+    //--------------------------------------------------
+// PERFIL DE AUDIENCIA
+//--------------------------------------------------
+
+function actualizarPerfil(registro){
+
+    const genero =
+        registro.hombres >= registro.mujeres
+        ? "Hombres"
+        : "Mujeres";
+
+    const edades = [
+
+        {
+            nombre:"Niños",
+            valor:Number(registro.ninos)
+        },
+
+        {
+            nombre:"Jóvenes",
+            valor:Number(registro.jovenes)
+        },
+
+        {
+            nombre:"Adultos",
+            valor:Number(registro.adultos)
+        },
+
+        {
+            nombre:"Mayores",
+            valor:Number(registro.mayores)
+        }
+
+    ];
+
+    edades.sort((a,b)=>b.valor-a.valor);
+
+    document.getElementById("perfilGenero").innerHTML =
+        genero;
+
+    document.getElementById("perfilEdad").innerHTML =
+        edades[0].nombre;
+
 }
 
-mesSelect.addEventListener("change", cargarPantallas);
 
-pantallaSelect.addEventListener("change", actualizarDashboard);
+//--------------------------------------------------
+// GRÁFICOS
+//--------------------------------------------------
+
+function actualizarGraficos(registro){
+
+    //------------------------
+    // GÉNERO
+    //------------------------
+
+    if(chartGenero){
+
+        chartGenero.destroy();
+
+    }
+
+    chartGenero = new Chart(ctxGenero,{
+
+    type:"doughnut",
+
+    data:{
+
+        labels:["Hombres","Mujeres"],
+
+        datasets:[{
+
+            data:[registro.hombres,registro.mujeres],
+
+            backgroundColor:[
+                "#005EB8",
+                "#7EB8F5"
+            ],
+
+            borderWidth:0,
+
+            hoverOffset:12
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        cutout:"72%",
+
+        plugins:{
+
+            legend:{
+
+                position:"bottom",
+
+                labels:{
+
+                    usePointStyle:true,
+
+                    pointStyle:"circle",
+
+                    padding:20,
+
+                    font:{
+                        family:"Inter",
+                        size:13
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+
+
+    //------------------------
+    // EDADES
+    //------------------------
+
+    if(chartEdad){
+
+        chartEdad.destroy();
+
+    }
+
+   chartEdad = new Chart(ctxEdad,{
+
+type:"bar",
+
+data:{
+
+labels:["Niños","Jóvenes","Adultos","Mayores"],
+
+datasets:[{
+
+label:"%",
+
+data:[
+
+registro.ninos,
+
+registro.jovenes,
+
+registro.adultos,
+
+registro.mayores
+
+],
+
+backgroundColor:[
+
+"#BFD8F5",
+
+"#4DA3FF",
+
+"#005EB8",
+
+"#0D3E6D"
+
+],
+
+borderRadius:8,
+
+borderSkipped:false
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+max:100,
+
+grid:{
+
+color:"#E8EDF3"
+
+}
+
+},
+
+x:{
+
+grid:{
+
+display:false
+
+}
+
+}
+
+}
+
+}
+
+});
+}
+
+mesSelect.addEventListener(
+
+"change",
+
+cargarPantallas
+
+);
+
+pantallaSelect.addEventListener(
+
+"change",
+
+actualizarDashboard
+
+);
 
 cargarDatos();
 
