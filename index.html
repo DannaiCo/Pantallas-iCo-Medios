@@ -125,13 +125,97 @@ align-items:start;
 
 }
 
-.photo-card{
-    background:white;
-    border-radius:22px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+.left{
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+
 }
 
+/* NUEVO */
+.infoPantalla{
+
+background:white;
+
+border-radius:22px;
+
+padding:24px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:18px;
+
+}
+
+.infoItem{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.infoItem i{
+
+width:42px;
+
+height:42px;
+
+border-radius:12px;
+
+background:#EAF3FC;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#005EB8;
+
+font-size:18px;
+
+}
+
+.infoItem span{
+
+display:block;
+
+font-size:12px;
+
+color:#7B8794;
+
+margin-bottom:4px;
+
+}
+
+.infoItem strong{
+
+font-size:16px;
+
+font-weight:700;
+
+color:#1F2937;
+
+}
+
+.photo-card{
+
+background:white;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
 
 .photo{
 
@@ -404,6 +488,8 @@ grid-template-columns:1fr;
 
 <div class="main">
 
+<div class="left">
+
 <div class="photo-card">
 
 <div class="photo">
@@ -420,8 +506,70 @@ grid-template-columns:1fr;
 
 </div>
 
-<div class="right">
+<div class="infoPantalla">
 
+<div class="infoItem">
+
+<i class="fa-solid fa-ruler-combined"></i>
+
+<div>
+
+<span>Área</span>
+
+<strong id="metros"></strong>
+
+</div>
+
+</div>
+
+<div class="infoItem">
+
+<i class="fa-solid fa-table-cells-large"></i>
+
+<div>
+
+<span>Pitch</span>
+
+<strong id="pitch"></strong>
+
+</div>
+
+</div>
+
+<div class="infoItem">
+
+<i class="fa-solid fa-sun"></i>
+
+<div>
+
+<span>Brillo</span>
+
+<strong id="nits"></strong>
+
+</div>
+
+</div>
+
+<div class="infoItem">
+
+<i class="fa-solid fa-display"></i>
+
+<div>
+
+<span>Resolución</span>
+
+<strong id="dimensiones"></strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+    
 <div class="big-card">
 
 <h3>Audiencia Total</h3>
@@ -502,7 +650,7 @@ Fuente: Quividi · Dashboard desarrollado por iCo Medios
 <script>
 
 const API_URL =
-"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnS9f9lZjlwrwBGkQJ_z1uor1L9WoPo5PIq9UmtCR131QaAnbIOqYBuyg9mAVurJSjqAnLmI-o4cmX87ykS62tk89tPYypLvm_lUuMiQuy9MP2q2SjleyaK4C5kV28C80p1FpBE-hGAbaZieDsvFlu9anv7tpT-v6VRHRH2tU_tKAqN2Euvk-S1YA4utDrw5zwIl57PWQ2uVjNBzmK-3LTTvRQh0WLXAKDTF5KsFdHUXGPUdSrqoe7xWRmoKvBxczruRaiajISqshORFafq1cW2CZ-EzqQ&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198"
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQJl_JBuAlBbSsAYhSstl72d8tetEwzKKehO8dmMGmmTKPrFmU2hbWtOSVjidABitpTesN0mp0lx-3HyqS1j4LN7s_ok9oYcO3xZz1C-NwH-ZfoobCVP-eDxVYv0YNjuDTJkl4msnuEVx_tFR3FPgFax99YCLMLVxTqQ41xd7BMkstsi6_XXJ1vI8ier5ld71JfSJ1ewv6kW5Db9udP5Ct1fDuovFDrPEiX-lk1AyOMYgMm5YNh_zFATn145wIxrC3Zw5kVr-WoDrcpLKwFl_wonB0EBw&lib=MHaUVyxhtorJojY1VEqyAOp-pvmjiA198"
 let datos=[];
 
 let chartGenero=null;
