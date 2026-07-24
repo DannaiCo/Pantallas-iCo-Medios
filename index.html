@@ -754,14 +754,13 @@ function actualizarDashboard(){
 
     //---------------------
 
-    document.getElementById("fotoPantalla").src=
+    const nombreArchivo = registro.nombre
+    .replace("Est. ", "")
+    .trim()
+    .toUpperCase();
 
-        registro.foto && registro.foto!=""
-
-        ? registro.foto
-
-        : "https://picsum.photos/800/600";
-
+document.getElementById("fotoPantalla").src =
+`https://raw.githubusercontent.com/DannaiCo/Pantallas-iCo-Medios/main/fotos/${nombreArchivo}.jpg`;
     //---------------------
 
     // NOMBRE
