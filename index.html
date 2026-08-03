@@ -68,6 +68,9 @@ box-shadow:0 4px 18px rgba(0,0,0,.05);
     box-shadow: 0 10px 30px rgba(0,0,0,.06);
     margin-bottom: 25px;
     border: 1px solid #EEF2F7;
+    grid-column: 1 / -1; 
+    width: 100%;
+
 }
 
 .ai-card h3 {
@@ -488,8 +491,7 @@ height:55px;
     </div>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbyOfw4zz1lYLUWY4jIHCedv2Xf7I2xLAz1K4rPmNhqDb3IMvNu8FdPDYc4m4VRQgR0/exec";
-
+        const API_URL = "https://script.google.com/macros/s/AKfycbztXBJmX-0pE2jT8nr3_lCkqTjOf_dC6VVexIJHo4e8C2nS93C8mGjxtGyZYzBABEBo/exec"
 async function preguntarIA() {
     const input = document.getElementById("aiInput");
     const btn = document.getElementById("aiBtn");
