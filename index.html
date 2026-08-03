@@ -61,6 +61,82 @@ padding:0 45px;
 box-shadow:0 4px 18px rgba(0,0,0,.05);
 
 }
+    .ai-card {
+    background: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    margin-bottom: 25px;
+    border: 1px solid #EEF2F7;
+}
+
+.ai-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ico-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ai-input-container {
+    display: flex;
+    gap: 12px;
+}
+
+.ai-input-container input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.ai-input-container input:focus {
+    border-color: var(--ico-blue);
+}
+
+.ai-input-container button {
+    background: var(--ico-blue);
+    color: white;
+    border: none;
+    padding: 0 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-input-container button:hover {
+    background: #00468B;
+}
+
+.ai-input-container button:disabled {
+    background: #94A3B8;
+    cursor: not-allowed;
+}
+
+.ai-response {
+    margin-top: 18px;
+    padding: 18px;
+    background: #F8FAFC;
+    border-radius: 12px;
+    border-left: 4px solid var(--ico-blue);
+    font-size: 14px;
+    line-height: 1.6;
+    color: #334155;
+    display: none;
+    white-space: pre-wrap;
+}
 
 .logo{
 
@@ -369,11 +445,11 @@ height:55px;
 
                 <div class="grid">
                     <div class="card">
-                        <h3>Impresiones Vehiculares</h3>
+                        <h3>Audiencia Vehicular</h3>
                         <div class="value" id="vehiculos"></div>
                     </div>
                     <div class="card">
-                        <h3>Impresiones Peatonales</h3>
+                        <h3>Audiencia Peatonal</h3>
                         <div class="value" id="peatones"></div>
                     </div>
                     <div class="card">
@@ -392,6 +468,16 @@ height:55px;
                         <h3>Distribución por edades</h3>
                         <canvas id="graficoEdad"></canvas>
                     </div>
+                    <div class="ai-card">
+    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Asesor Comercial IA</h3>
+    <div class="ai-input-container">
+        <input type="text" id="aiInput" placeholder="Ej: Necesito pantallas para un whisky de lujo en zona de rumba..." onkeypress="if(event.key === 'Enter') preguntarIA()">
+        <button onclick="preguntarIA()" id="aiBtn">
+            <i class="fa-solid fa-paper-plane"></i> Consultar
+        </button>
+    </div>
+    <div id="aiResponse" class="ai-response"></div>
+</div>
                 </div>
             </div>
         </div>
@@ -402,8 +488,39 @@ height:55px;
     </div>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbzaOSIuQoXPrEntUUfuG4Sch1CZsxv_KxnzEaIe6B9uAq5-kdiqvR9Luhu2ftnBRccW/exec" 
+        const API_URL = "https://script.google.com/macros/s/AKfycbyOfw4zz1lYLUWY4jIHCedv2Xf7I2xLAz1K4rPmNhqDb3IMvNu8FdPDYc4m4VRQgR0/exec";
 
+async function preguntarIA() {
+    const input = document.getElementById("aiInput");
+    const btn = document.getElementById("aiBtn");
+    const responseBox = document.getElementById("aiResponse");
+    const pregunta = input.value.trim();
+
+    if (!pregunta) return;
+
+    // Estado de carga
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analizando...';
+    responseBox.style.display = "block";
+    responseBox.innerText = "Consultando catálogo, restricciones y perfiles de iCo Medios...";
+
+    try {
+        const res = await fetch(`${API_URL}?pregunta=${encodeURIComponent(pregunta)}`);
+        const data = await res.json();
+        
+        if (data.respuesta) {
+            responseBox.innerText = data.respuesta;
+        } else {
+            responseBox.innerText = "No se obtuvo una respuesta válida del servidor.";
+        }
+    } catch (error) {
+        responseBox.innerText = "Error al conectar con el Asesor IA. Revisa tu conexión e intenta de nuevo.";
+        console.error(error);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Consultar';
+    }
+}
 
         let datos = [];
 
