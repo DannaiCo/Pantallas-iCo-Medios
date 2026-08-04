@@ -459,6 +459,10 @@ height:55px;
                         <h3>Conteo Vehicular</h3>
                         <div class="value" id="conteo"></div>
                     </div>
+                    <div class="card">
+                        <h3>Segundos de presencia</h3>
+                        <div class="value" id="presencia"></div>
+                    </div>
                     <!-- El perfil predominante ha sido removido de aquí -->
                 </div>
 
@@ -597,6 +601,7 @@ async function preguntarIA() {
             document.getElementById("vehiculos").innerHTML = Number(registro.vehiculos).toLocaleString();
             document.getElementById("peatones").innerHTML = Number(registro.peatones).toLocaleString();
             document.getElementById("conteo").innerHTML = Number(registro.conteoVehiculos).toLocaleString();
+            document.getElementById("presencia").innerHTML = (Number(registro.presencia) || 0).toLocaleString() + " s";
             document.getElementById("spots").innerHTML = Number(registro.spotsMensuales).toLocaleString() || "-";
             document.getElementById("cupos").innerHTML = registro.cuposPorPantalla || "-";
             document.getElementById("diaAlcance").innerHTML = registro.diaDeMayorAlcance || "-";
