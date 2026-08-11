@@ -376,6 +376,7 @@ height:55px;
         </div>
 
         <div class="main">
+            <!-- COLUMNA IZQUIERDA -->
             <div class="left">
                 <div class="photo-card">
                     <div class="photo">
@@ -387,59 +388,68 @@ height:55px;
                 </div>
 
                 <div class="infoPantalla">
-    <div class="infoItem">
-        <i class="fa-solid fa-ruler-combined"></i>
-        <div>
-            <span>Área</span>
-            <strong id="metros"></strong>
-        </div>
-    </div>
-    <div class="infoItem">
-        <i class="fa-solid fa-table-cells-large"></i>
-        <div>
-            <span>Pitch</span>
-            <strong id="pitch"></strong>
-        </div>
-    </div>
-    <div class="infoItem">
-        <i class="fa-solid fa-sun"></i>
-        <div>
-            <span>Brillo</span>
-            <strong id="nits"></strong>
-        </div>
-    </div>
-    <div class="infoItem">
-        <i class="fa-solid fa-display"></i>
-        <div>
-            <span>Resolución</span>
-            <strong id="dimensiones"></strong>
-        </div>
-    </div>
-    <!-- Nuevos Datos -->
-    <div class="infoItem">
-        <i class="fa-solid fa-play"></i>
-        <div>
-            <span>Spots Mensuales</span>
-            <strong id="spots"></strong>
-        </div>
-    </div>
-    <div class="infoItem">
-        <i class="fa-solid fa-ticket"></i>
-        <div>
-            <span>Cupos</span>
-            <strong id="cupos"></strong>
-        </div>
-    </div>
-    <div class="infoItem">
-        <i class="fa-solid fa-calendar-day"></i>
-        <div>
-            <span>Día Mayor Alcance</span>
-            <strong id="diaAlcance"></strong>
-        </div>
-    </div>
-</div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                        <div>
+                            <span>Área Pantalla</span>
+                            <strong id="metros"></strong>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                        <div>
+                            <span>Pitch</span>
+                            <strong id="pitch"></strong>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-sun"></i>
+                        <div>
+                            <span>Brillo</span>
+                            <strong id="nits"></strong>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-display"></i>
+                        <div>
+                            <span>Resolución</span>
+                            <strong id="dimensiones"></strong>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-play"></i>
+                        <div>
+                            <span>Spots Mensuales</span>
+                            <strong id="spots"></strong>
+                        </div>
+                    </div>
+                    <div class="infoItem">
+                        <i class="fa-solid fa-ticket"></i>
+                        <div>
+                            <span>Cupos</span>
+                            <strong id="cupos"></strong>
+                        </div>
+                    </div>
+                    <!-- Día de mayor alcance -->
+                    <div class="infoItem">
+                        <i class="fa-solid fa-calendar-day"></i>
+                        <div>
+                            <span>Día Mayor Alcance</span>
+                            <strong id="diaAlcance"></strong>
+                        </div>
+                    </div>
+                    <!-- Horario de mayor alcance -->
+                    <div class="infoItem">
+                        <i class="fa-solid fa-clock"></i>
+                        <div>
+                            <span>Horario Mayor Alcance</span>
+                            <strong id="horarioAlcance"></strong>
+                        </div>
+                    </div>
                 </div>
+            </div> <!-- Fin .left -->
 
+            <!-- COLUMNA DERECHA -->
             <div class="right">
                 <div class="big-card">
                     <h3>Audiencia Total</h3>
@@ -463,7 +473,6 @@ height:55px;
                         <h3>Segundos de presencia</h3>
                         <div class="value" id="presencia"></div>
                     </div>
-                    <!-- El perfil predominante ha sido removido de aquí -->
                 </div>
 
                 <div class="demografia">
@@ -476,33 +485,33 @@ height:55px;
                         <canvas id="graficoEdad"></canvas>
                     </div>
                     <div class="ai-card">
-    <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Asesor Comercial IA</h3>
-    <div class="ai-input-container">
-        <input type="text" id="aiInput" placeholder="Ej: Necesito pantallas para un whisky de lujo en zona de rumba..." onkeypress="if(event.key === 'Enter') preguntarIA()">
-        <button onclick="preguntarIA()" id="aiBtn">
-            <i class="fa-solid fa-paper-plane"></i> Consultar
-        </button>
-    </div>
-    <div id="aiResponse" class="ai-response"></div>
-</div>
+                        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Asesor Comercial IA</h3>
+                        <div class="ai-input-container">
+                            <input type="text" id="aiInput" placeholder="Ej: Necesito pantallas para un whisky de lujo en zona de rumba..." onkeypress="if(event.key === 'Enter') preguntarIA()">
+                            <button onclick="preguntarIA()" id="aiBtn">
+                                <i class="fa-solid fa-paper-plane"></i> Consultar
+                            </button>
+                        </div>
+                        <div id="aiResponse" class="ai-response"></div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div> <!-- Fin .right -->
+        </div> <!-- Fin .main -->
 
         <div class="footer">
             Fuente: Quividi · Dashboard desarrollado por iCo Medios
         </div>
-    </div>
+    </div> <!-- Fin .container -->
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbztXBJmX-0pE2jT8nr3_lCkqTjOf_dC6VVexIJHo4e8C2nS93C8mGjxtGyZYzBABEBo/exec"
-async function preguntarIA() {
-    const input = document.getElementById("aiInput");
-    const btn = document.getElementById("aiBtn");
-    const responseBox = document.getElementById("aiResponse");
-    const pregunta = input.value.trim();
+        async function preguntarIA() {
+            const input = document.getElementById("aiInput");
+            const btn = document.getElementById("aiBtn");
+            const responseBox = document.getElementById("aiResponse");
+            const pregunta = input.value.trim();
 
-    if (!pregunta) return;
+            if (!pregunta) return;
 
     // Estado de carga
     btn.disabled = true;
@@ -604,7 +613,8 @@ async function preguntarIA() {
             document.getElementById("presencia").innerHTML = (Number(registro.presencia) || 0).toLocaleString() + " s";
             document.getElementById("spots").innerHTML = Number(registro.spotsMensuales).toLocaleString() || "-";
             document.getElementById("cupos").innerHTML = registro.cuposPorPantalla || "-";
-            document.getElementById("diaAlcance").innerHTML = registro.diaDeMayorAlcance || "-";
+            document.getElementById("diaAlcance").innerText = registro.diaDeMayorAlcance || "-";
+            document.getElementById("horarioAlcance").innerText = registro.horarioMayorAlcance || "-";
 
             actualizarGraficos(registro);
         }
