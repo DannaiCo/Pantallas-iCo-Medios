@@ -610,7 +610,11 @@ height:55px;
             document.getElementById("vehiculos").innerHTML = Number(registro.vehiculos).toLocaleString();
             document.getElementById("peatones").innerHTML = Number(registro.peatones).toLocaleString();
             document.getElementById("conteo").innerHTML = Number(registro.conteoVehiculos).toLocaleString();
-            document.getElementById("presencia").innerHTML = (Number(registro.presencia) || 0).toLocaleString() + " s";
+            document.getElementById("presencia").textContent =
+  (Number(registro.presencia) / 10).toLocaleString("es-CO", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  }) + " s";
             document.getElementById("spots").innerHTML = Number(registro.spotsMensuales).toLocaleString() || "-";
             document.getElementById("cupos").innerHTML = registro.cuposPorPantalla || "-";
             document.getElementById("diaAlcance").innerText = registro.diaDeMayorAlcance || "-";
